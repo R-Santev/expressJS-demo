@@ -1,5 +1,6 @@
 const Router = require('express').Router;
 const router = Router();
+const productServices = require('../services/productServices');
 
 router.get('/', (req, res) => {
     res.render('home', {title: "Home"});
@@ -7,6 +8,16 @@ router.get('/', (req, res) => {
 
 router.get('/create', (req, res) => {
     res.render('create', {title: "Create"});
+})
+
+router.post('/create', (req, res) => {
+
+    //TODO: Validate form data
+    let newCube = productServices.create(req.body);
+    
+    productServices.save(newCube)
+    .then(res.redirect('/'))
+    .catch(err => console.log(err));
 })
 
 router.get('/details/:productId', (req, res) => {
