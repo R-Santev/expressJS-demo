@@ -7,7 +7,6 @@ const uniqueId = require('uniqid');
 const services = {
     create(data){
         return new Cube(
-            //TODO:create id in better way
             uniqueId(),
             data.name,
             data.description,
@@ -29,6 +28,10 @@ const services = {
             })
         })
         return result;
+    },
+
+    getAll(){
+        return cubes;
     }
 }
 
