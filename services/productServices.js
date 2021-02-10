@@ -6,33 +6,20 @@ const uniqueId = require('uniqid');
 
 const services = {
     create(data){
-        return new Cube(
+        let newCube =  new Cube(
             uniqueId(),
             data.name,
             data.description,
             data.imageUrl,
             data.difficultyLevel,
         )
-    },
 
-    async save(cube){
-        cubes.push(cube);
-        let filePath = path.normalize(path.join(__dirname, '../data/cubes.json'));
-        let result = await new Promise((resolve, reject) => {
-            fs.writeFile(filePath, JSON.stringify(cubes), (err) => {
-                if (err) {
-                    reject('The file writing failed.')
-                }
-    
-                resolve();
-            })
-        })
-        return result;
+        return newCube.save();
     },
 
     getAll(query){
 
-        let result = cubes;
+        let result = Cube.getAll();
 
         if (query.search) {
 

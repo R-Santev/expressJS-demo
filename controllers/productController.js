@@ -4,7 +4,6 @@ const productServices = require('../services/productServices');
 
 router.get('/', (req, res) => {
     let products = productServices.getAll(req.query);
-    console.log(products);
     res.render('home', {title: "Home", products});
 });
 
@@ -15,11 +14,10 @@ router.get('/create', (req, res) => {
 router.post('/create', (req, res) => {
 
     //TODO: Validate form data
-    let newCube = productServices.create(req.body);
+    productServices.create(req.body)
+        .then(res.redirect('/'))
+        .catch(err => console.log(err));
     
-    productServices.save(newCube)
-    .then(res.redirect('/'))
-    .catch(err => console.log(err));
 })
 
 router.get('/details/:productId', (req, res) => {
