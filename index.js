@@ -2,11 +2,13 @@
 const express = require('express');
 const config = require('./config/config.js');
 const expressConfig = require('./config/express');
+const mongooseConfig = require('./config/mongoose');
 const routes = require('./routes');
 
 const app = express();
 
 expressConfig(app);
+mongooseConfig(app);
 
 app.use(routes);
 

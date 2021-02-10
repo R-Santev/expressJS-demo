@@ -1,22 +1,14 @@
 const Cube = require("../models/Cube");
-const uniqueId = require('uniqid');
 
 const services = {
     create(data){
-        let newCube =  new Cube(
-            uniqueId(),
-            data.name,
-            data.description,
-            data.imageUrl,
-            data.difficultyLevel,
-        )
-
+        let newCube =  new Cube(data);
         return newCube.save();
     },
 
-    getAll(query){
+    async getAll(query){
 
-        let result = Cube.getAll();
+        let result = await Cube.find().lean();
 
         if (query.search) {
 
@@ -37,7 +29,7 @@ const services = {
     },
 
     getOne(id){
-        return Cube.getOne(id);
+        return Cube.findById(id).lean();
     }
 }
 

@@ -3,8 +3,10 @@ const router = Router();
 const productServices = require('../services/productServices');
 
 router.get('/', (req, res) => {
-    let products = productServices.getAll(req.query);
-    res.render('home', {title: "Home", products});
+    productServices.getAll(req.query)
+        .then(products => {
+            res.render('home', {title: "Home", products});
+        });
 });
 
 router.get('/create', (req, res) => {
@@ -21,8 +23,11 @@ router.post('/create', (req, res) => {
 })
 
 router.get('/details/:productId', (req, res) => {
-    let cube = productServices.getOne(req.params.productId);
-    res.render('details', {title: "Details", cube});
+    productServices.getOne(req.params.productId)
+        .then((cube => {
+            res.render('details', {title: "Details", cube});
+        }))
+    
 })
 
 module.exports = router;
