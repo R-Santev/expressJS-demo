@@ -1,7 +1,4 @@
 const Cube = require("../models/Cube");
-const cubes = require('../data/cubes.json');
-const fs = require('fs');
-const path = require('path');
 const uniqueId = require('uniqid');
 
 const services = {
@@ -37,6 +34,10 @@ const services = {
         }
 
         return result;
+    },
+
+    getOne(id){
+        return Cube.getOne(id);
     }
 }
 

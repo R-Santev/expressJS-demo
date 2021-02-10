@@ -29,6 +29,10 @@ class Cube {
     static getAll(){
         return cubes;
     }
+
+    static getOne(id){
+        return cubes.find(x => x.id == id);
+    }
 }
 
 module.exports = Cube;
